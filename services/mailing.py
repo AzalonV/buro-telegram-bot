@@ -14,6 +14,13 @@ class EventPost:
         self.photo = photo
 
 class MalingServcise:
+    
+    @staticmethod 
+    async def stop(id):
+        async with async_session_maker() as session:
+            new_setting = update(ChatSetting).where(ChatSetting.id == id).values(is_mailing = False)
+            await session.execute(new_setting)
+            await session.commit()
 
     @staticmethod
     async def formulate_event_post(text : str, time : str, date : str, photo : str) -> str: #сформулювати івентовий пост

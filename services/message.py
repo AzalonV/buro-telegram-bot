@@ -1,6 +1,7 @@
 from datetime import datetime
+import re
 
-from aiogram.types import InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, Message
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters.callback_data import CallbackData
 from sqlalchemy import select, update, func
@@ -8,14 +9,6 @@ from sqlalchemy import select, update, func
 from database.sql import async_session_maker
 from database.models.feedback_massage import FeedbackMessage
 from database.models.event import Event
-
-
-class OwnCallback(CallbackData, prefix="ok"):
-    type: str
-    page: int
-    group: str
-    day: str
-
 
 class MessageService:
 
@@ -53,20 +46,16 @@ class MessageService:
             return events.scalars().all()
         
     @staticmethod
-    async def create_event_buttons(page : int, max : int, is_buuto_request : bool):
-        event_builder = InlineKeyboardBuilder()
-        if page != 0:
-            callback_data = OwnCallback(type = "change_page",
-                                              page = page-1).pack()
-            left = InlineKeyboardButton(text="⬅️ Вліво", callback_data=callback_data)
-            event_builder.add(left)
-        if page != max:
-            callback_data = OwnCallback(type = "change_page",
-                                              page = page+1).pack()
-            right = InlineKeyboardButton(text="Вправо ➡️", callback_data=callback_data)
-            event_builder.add(right)
-        event_builder.adjust(2)
-        return event_builder
+    async def util_for_admin(message : Message):
+        answer = message.reply_to_message
+        if answer is not None:
+            ids = [answer.from_user.id]
+        else:
+            split_id = message.text.split(" ")
+            ids = split_id[1:]
+        return ids
+        
+    
 
     
         
