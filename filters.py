@@ -1,9 +1,13 @@
+from typing import Union
+
 from aiogram import types
+from aiogram.filters import Filter
 from aiogram.filters import BaseFilter
 from aiogram import F
 
 from services.user import UserService
 from services.admin import AdminService
+
 
 class IsUser(BaseFilter): #фільтр для перевірки ролі на user
 
@@ -14,20 +18,16 @@ class IsAdmin(BaseFilter): #фільтр дял перевірки ролі на
 
     async def __call__(self, message: types.message):
         return await AdminService.is_admin(message.from_user.id)
+    
+class IsSuperAdmin(BaseFilter): #фільтр дял перевірки ролі на admin
+
+    async def __call__(self, message: types.message):
+        return await AdminService.is_super_admin(message.from_user.id)
+    
 
 class isReplied(BaseFilter):
 
     async def __call__(self, message : types.message):
-        try:
-            msg = message.reply_to_message.text
-            return True
-        except AttributeError:
-            return False
-      
-# class StateFilter(F.text): #фльтр на те чи знаходиться юзер в якомусь стані
+        return message.reply_to_message.text is not None
+    
 
-#     async def __Call__(self, message: types.message):
-#         answer = UserService.State(message.from_user.id)
-#         if answer:
-#             return True
-#         return answer
