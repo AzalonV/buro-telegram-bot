@@ -27,5 +27,8 @@ class ScheduleService:
             delet_request = delete(FeedbackMessage).where(FeedbackMessage.message_time <= three_days_ago)
             await session.execute(delet_request)
             await session.commit()
-    
+
+    @staticmethod
+    async def keep_alive():
+        print("I still alive")
 
