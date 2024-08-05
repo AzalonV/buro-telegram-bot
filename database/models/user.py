@@ -9,4 +9,5 @@ class User(Base):
     group = Column(String, default = "None")
     is_member_buro = Column(Boolean, default=False)
     is_senior_student = Column(Boolean, default=False)
+    is_forecast = Column(Boolean, default=False)
     first_activity = Column(DateTime, default=func.now())
