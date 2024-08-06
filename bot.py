@@ -49,15 +49,16 @@ async def main():
                     admin_router,
                     chat_router] 
     
+    app = web.Application()
+
+    web.run_app(app, host="0.0.0.0", port=8080)
+
     bot = Bot(token="7212921039:AAHN6s9gHjW3dgz5n9AOafFMWTQwim40m3s", default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
     dp.include_routers(*routers_list)
     dp.startup.register(on_startup)
 
-    app = web.Application()
-
-    web.run_app(app, host="0.0.0.0", port=8080)
     
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp, bot=bot, secret_token="dwrrfacw4octhw73a0"
