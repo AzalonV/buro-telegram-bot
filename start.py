@@ -7,7 +7,7 @@ from scheduler_complete import scheduler_start
 from database.sql import create_db_and_tables
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
-from flask.flask import app
+from magic import app
 
 
 async def start() -> None:
