@@ -57,10 +57,10 @@ async def main():
 
     app = web.Application()
 
+    web.run_app(app, host="0.0.0.0", port=8080)
+    
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp, bot=bot, secret_token="dwrrfacw4octhw73a0"
     )
     
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
-
-    web.run_app(app, host="0.0.0.0", port=8080)
