@@ -63,4 +63,4 @@ async def main():
     
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
 
-    web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="0.0.0.0", port=8080)
