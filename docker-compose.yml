@@ -9,7 +9,7 @@ services:
     working_dir: "/usr/src/app/bot"
     volumes:
       - .:/usr/src/app/bot
-    command: python3 -m bot
+    command: python3 -m start
     restart: always
     env_file:
       - ".env"
