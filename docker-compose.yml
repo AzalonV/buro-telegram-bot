@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   bot:
-    image: "bot"
+    # image: "bot"
     stop_signal: SIGINT
     build:
       context: .
