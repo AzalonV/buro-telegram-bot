@@ -1,24 +1,8 @@
-version: '3.3'
-
-services:
-  bot:
-    # image: "bot"
-    stop_signal: SIGINT
-    build:
-      context: .
-    working_dir: "/usr/src/app/bot"
-    volumes:
-      - .:/usr/src/app/bot
-    command: python3 -m start
-    restart: always
-    env_file:
-      - ".env"
-
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
+FROM python:3.8
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python", "main.py"]
 
 
   ##   To enable postgres uncomment the following lines
