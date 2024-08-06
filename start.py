@@ -10,7 +10,7 @@ from database.sql import create_db_and_tables
 
 async def start() -> None:
 
-    await scheduler_start()
+    #await scheduler_start()
     await create_db_and_tables()
     await main()
 
