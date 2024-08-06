@@ -10,8 +10,8 @@ from database.sql import create_db_and_tables
 
 async def start() -> None:
 
-    #await scheduler_start()
-    await main()
+    await scheduler_start()
+    №await main()
     #await create_db_and_tables()
 
 if __name__ == "__main__":
